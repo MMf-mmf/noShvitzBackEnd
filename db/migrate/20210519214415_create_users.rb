@@ -3,13 +3,13 @@ class CreateUsers < ActiveRecord::Migration[6.1]
     create_table :users do |t|
       t.string :name
       t.string :email
-      t.integer :ghoneNumber1
-      t.integer :ghoneNumber2
+      t.bigint :ghoneNumber1
+      t.bigint :ghoneNumber2
       t.string :address
-      t.bullion :activated
-      t.bullion :suspended
-      t.bullion :admin
-      t.bullion :employee
+      t.boolean :activated
+      t.boolean :suspended
+      t.boolean :admin
+      t.boolean :employee
       t.string :password
       t.string :password_digest
 

@@ -1,4 +1,4 @@
 class Product < ApplicationRecord
-    has_many :orders
-    belongs_to :categories
+    belongs_to :categories, optional: true
+    has_many :order_details
 end
