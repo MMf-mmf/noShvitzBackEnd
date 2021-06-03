@@ -59,24 +59,17 @@ class OrderDetailsController < ApplicationController
         
         order_item_detail = OrderDetail.find_by(id: params[:id])
         order = Order.find_by(id: order_item_detail.order_id)
+
         if (order.total === nil)
             order.update!(total: 0)
         end
+
         order.update!(total: (order.total - (order_item_detail.quantity * Product.find_by(id: order_item_detail.product_id).price)))
         order_item_detail.destroy!
         render json: {status_code: "item removed"}
     end
 
-    # def my_cart
-    #     categoryId = params[:category_id]
-    #     userId = params[:user_id]
-    #     # if a a pruduct axistes in the cart just a to it and do not create a new item
-    #     all_carts = Order.where(cart: true)
-    #     user_carts = all_carts.select{ | cart |cart.user_id == userId && cart.category_id == categoryId}
-    #     cart = user_carts[0]
-  
-    #     render json: 
-    # end
+
 
     
 
