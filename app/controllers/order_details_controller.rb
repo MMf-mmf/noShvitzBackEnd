@@ -66,7 +66,8 @@ class OrderDetailsController < ApplicationController
 
         order.update!(total: (order.total - (order_item_detail.quantity * Product.find_by(id: order_item_detail.product_id).price)))
         order_item_detail.destroy!
-        render json: {status_code: "item removed"}
+        # byebug
+        render json: {amount_remaining: order.order_details.length}
     end
 
 

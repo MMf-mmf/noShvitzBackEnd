@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2021_05_20_154503) do
     t.string "image"
     t.integer "category_id"
     t.float "price"
+    t.integer "limit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

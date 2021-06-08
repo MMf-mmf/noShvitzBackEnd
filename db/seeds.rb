@@ -65,6 +65,8 @@ orderd3 = OrderDetail.create!(order_id: order2.id, product_id: product3.id, quan
 orderd3 = OrderDetail.create!(order_id: order2.id, product_id: product4.id, quantity: 5)
 
 
+
+
 # query to get the 
 # cart.find_by(id: 1).order_details.first.product.company
 

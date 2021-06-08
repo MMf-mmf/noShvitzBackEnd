@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
     def cart
         userId = params[:user_id]
         categoryId = params[:category_id]
-        
+        # byebug
         all_carts = Order.where(cart: true)
         user_carts = all_carts.select{ | cart |cart.user_id == userId && cart.category_id == categoryId}
         cart_details = user_carts[0].order_details
