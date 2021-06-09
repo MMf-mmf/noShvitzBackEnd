@@ -3,15 +3,18 @@ class CreateUsers < ActiveRecord::Migration[6.1]
     create_table :users do |t|
       t.string :name
       t.string :email
-      t.bigint :ghoneNumber1
-      t.bigint :ghoneNumber2
+      t.bigint :phoneNumber1
+      t.bigint :phoneNumber2
       t.string :address
-      t.boolean :activated
-      t.boolean :suspended
-      t.boolean :admin
-      t.boolean :employee
+      t.boolean :activated, default: false
+      t.boolean :suspended, default: false
+      t.boolean :admin, default: false
+      t.boolean :employee, default: false
       t.string :password
       t.string :password_digest
+      t.string :remember_digest
+      t.string :activation_digest
+      t.datetime :activated_at
 
       t.timestamps
     end

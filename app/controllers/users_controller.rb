@@ -1,20 +1,20 @@
 class UsersController < ApplicationController
-    skip_before_action :authenticate, only: [:create, :login, :index, :show]
-
+    # skip_before_action :authenticate, only: [:create, :login, :index, :show]
+    skip_before_action :authorized, only: [:create, :login]
     def index
         user = User.all
         render json: user
     end
 
     def create
+        # byebug
             user = User.create!(user_sign_up_params)
-        
-
         if user.valid?
             token = encode_token({ user_id: user.id })
     
-            render json: { user: userSerializer.new(user), token: token }, status: :created
+            render json: { user: UserSerializer.new(user), token: token }, status: :created
         else
+           
             render json: { error: user.errors.full_messages }, status: :bad_request
         end
     end
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     def login
         user = User.find_by(email: params[:email])
 
-    #   byebug
+    #  byebug
 
         if user && user.authenticate(params[:password])
           token = encode_token({ user_id: user.id })
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
           
           render json: { user: UserSerializer.new(user), token: token }
           
-          # render json: user # implicitly run serializer
+          render json: user # implicitly run serializer
         else
           render json: { error: "Invalid name or password" }, status: :unauthorized
         end
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     def profile
         # byebug
         # find that use in the database (happens in the authenticate before_action)
-        @current_user.update(age: params[:age], name: params[:name], email: params[:email])
+        @current_user.update(name: params[:name], email: params[:email], phoneNumber1: params[:phoneNumber1], phoneNumber2: params[:phoneNumber2])
         render json: @current_user
     end
 
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
 
     private
     def user_sign_up_params
-        params.require(:user).permit(:name, :email, :ghoneNumber1, :ghoneNumber2, :address)
+        params.require(:user).permit(:name, :email, :phoneNumber1, :phoneNumber2, :password)
     end
 
 

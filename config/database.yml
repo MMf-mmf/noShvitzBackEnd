@@ -79,8 +79,17 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+
+
+
+
 production:
-  <<: *default
+  # <<: *default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: project_no_shvitz_production
   username: project_no_shvitz
   password: <%= ENV['PROJECT_NO_SHVITZ_DATABASE_PASSWORD'] %>

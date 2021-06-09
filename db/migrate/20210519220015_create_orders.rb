@@ -4,7 +4,7 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.integer :user_id
       t.integer :employee_id
       t.integer :category_id
-      t.float :total
+      t.float :total, default: 0
       t.string :notes
       t.boolean :fulfilled
       t.boolean :cart

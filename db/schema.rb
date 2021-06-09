@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_20_154503) do
+ActiveRecord::Schema.define(version: 2021_06_08_172045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.integer "id_name"
     t.datetime "deadline"
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
@@ -38,7 +39,7 @@ ActiveRecord::Schema.define(version: 2021_05_20_154503) do
     t.integer "user_id"
     t.integer "employee_id"
     t.integer "category_id"
-    t.float "total"
+    t.float "total", default: 0.0
     t.string "notes"
     t.boolean "fulfilled"
     t.boolean "cart"
@@ -61,17 +62,21 @@ ActiveRecord::Schema.define(version: 2021_05_20_154503) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.bigint "ghoneNumber1"
-    t.bigint "ghoneNumber2"
+    t.bigint "phoneNumber1"
+    t.bigint "phoneNumber2"
     t.string "address"
-    t.boolean "activated"
-    t.boolean "suspended"
-    t.boolean "admin"
-    t.boolean "employee"
+    t.boolean "activated", default: false
+    t.boolean "suspended", default: false
+    t.boolean "admin", default: false
+    t.boolean "employee", default: false
     t.string "password"
     t.string "password_digest"
+    t.string "remember_digest"
+    t.string "activation_digest"
+    t.datetime "activated_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
