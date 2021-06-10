@@ -1,5 +1,5 @@
 class AccountActivationsController < ApplicationController
-    before_create :create_activation_digest
+    #before_create :create_activation_digest
 
 
 

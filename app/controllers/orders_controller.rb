@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-    # skip_before_action :authenticate, only: [:index,:show, :cart]
+    skip_before_action :authorized, only: [:index,:show, :cart]
 
 
     

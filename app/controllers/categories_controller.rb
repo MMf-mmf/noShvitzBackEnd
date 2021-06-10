@@ -1,8 +1,9 @@
 class CategoriesController < ApplicationController
-    # skip_before_action :authenticate, only: [:index]
+    skip_before_action :authorized, only: [:index]
 
     
     def index
+        
         categories = Category.all
         render json: categories.to_json(:include => {
             :products => {:only => [:name, :company, :price, :id, :category_id, :image]}
