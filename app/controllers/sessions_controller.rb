@@ -24,7 +24,9 @@ class SessionsController < ApplicationController
   end
 
   def logout
-    session.delete(:user_id)
+    # session.delete(:user_id)
+    reset_session
+    @current_user = nil
     render json: { message: "Logged Out"}
   end
 end
