@@ -14,7 +14,7 @@ Order.destroy_all
 puts "Destroyed Data"
 
 user1 = User.create!(email: "menachemfuterfas@gmail.com", name: "menachem frank", phoneNumber1: 7187743214, phoneNumber2: 6462345678, address: "435 windler rd", activated: false, admin: false, employee: false, password: "passpass", password_confirmation: "passpass")
-user2 = User.create!(email: "menachem@gmail.com", name: "zalman heller", phoneNumber1: 6787743214, phoneNumber2: 8762345678, address: "434 windler rd", activated: false, admin: false, employee: false, password: "passpass", password_confirmation: "passpass")
+user2 = User.create!(email: "menachem@gmail.com", name: "zalman heller", phoneNumber1: 6787743214, phoneNumber2: 8762345678, address: "434 windler rd", activated: false, admin: true, employee: false, password: "passpass", password_confirmation: "passpass")
 
 cat1 = Category.create!(name: "wine", id_name: 1, deadline: '2021-07-01', image: "https://image.freepik.com/free-photo/glass-bottle-with-delicious-red-wine-table-against-wooden_127657-3953.jpg")
 cat2 = Category.create!(name: "meat", id_name: 2, deadline: '2021-07-01', image: "https://static.fanpage.it/wp-content/uploads/sites/22/2018/11/raw-meat.jpg")

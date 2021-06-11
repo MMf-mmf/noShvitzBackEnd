@@ -1,9 +1,21 @@
 class UsersController < ApplicationController
     # skip_before_action :authenticate, only: [:create, :login, :index, :show]
-    skip_before_action :authorized, only: [:create, :login]
+    skip_before_action :authorized, only: [:create, :login, :update, :destroy]
+    before_action :correct_user, only: [:edit, :update]
+    before_action :admin_user, only: [:destroy, :index]
+
+
     def index
         user = User.all
         render json: user
+    end
+
+    def update
+        if @user.update(user_sign_up_params)
+            render json: {message: 'Successfully Updated'}
+        else
+            render json: {message: "Update not successful"}
+        end
     end
 
     def create
@@ -37,11 +49,12 @@ class UsersController < ApplicationController
         end
     end
 
+
     # before_action :authenticate
     def autologin
-        # byebug
         render json: @current_user
     end
+
 
     # before_action :authenticate
     def profile
@@ -52,14 +65,27 @@ class UsersController < ApplicationController
     end
 
 
+    def destroy
+        User.find(params[:id].destroy)
+        render json: {message: "account deleted"}
+    end
+
+
+    def correct_user
+        @user = User.find(params[:id])
+        render json: { error: "Douse not have permission to this rout " }, status: :unauthorized unless current_user?(@user)
+    end
+
+    def admin_user
+        render json: { error: "Douse not have permission to this rout"}, status: :unauthorized unless current_user?.admin?
+    end
+
     
 
     private
     def user_sign_up_params
         params.require(:user).permit(:name, :email, :phoneNumber1, :phoneNumber2, :password)
     end
-
-
 end
 
 
