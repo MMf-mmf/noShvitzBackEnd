@@ -7,16 +7,35 @@ class ApplicationController < ActionController::API
   
       def log_in(user)
         session[:user_id] = user.id
-      end
-  
-      def current_user
-          if session[:user_id]
-              @current_user ||= User.find_by(id: session[:user_id])
-          end
+        session[:session_token] = user.session_token
       end
 
+  # Remembers a user in a persistent session.
+  def remember(user)
+    user.remember
+    cookies.permanent.encrypted[:user_id] = user.id
+    cookies.permanent[:remember_token] = user.remember_token
+  end
   
-  
+
+  # Returns the user corresponding to the remember token cookie.
+  def current_user
+    if (user_id = session[:user_id])
+      # @current_user ||= User.find_by(id: user_id)
+      user = User.find_by(id: user_id)
+      if user && session[:session_token] == user.session_token
+        @current_user = user
+      end
+    elsif (user_id = cookies.encrypted[:user_id])
+      user = User.find_by(id: user_id)
+      if user && user.authenticated?(cookies[:remember_token])
+        log_in user
+        @current_user = user
+      end
+    end
+  end
+      
+
       def logged_in?
           !current_user.nil?
       end
@@ -25,53 +44,31 @@ class ApplicationController < ActionController::API
         current_user
         render json: { message: "Not logged in"}, status: :unauthorized unless @current_user
       end
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  # before_action :authenticate
-
-
-    # def encode_token(payload)
-    #     JWT.encode(payload, '5ome5ecret5', 'HS256')
-    #   end
-
-    #   def decode_token(token)
-    #     JWT.decode(token, '5ome5ecret5', true, { algorthim: 'HS256' })[0]
-    #   end
-
-    #   def authenticate
       
-    #     # JWT.decode will throw an error if decoding doesn't succeed
-    #     # so we need to handle the error so our app doesn't crash
-    #     begin
-    #       # decode token using JWT library
-    #       payload = decode_token(get_auth_token)
-          
-    #       # get the user_id from the decoded token and use it to
-    #       # set an instance variable for the current user
-    #       set_current_user!(payload["user_id"])
-    #     rescue
-    #       render json: { error: "Invalid Request" }, status: :unauthorized
-    #     end
-    #   end
-    
-    #   private
-    
-    #   def get_auth_token
-    #     auth_header = request.headers['Authorization']    
-    #     auth_header.split(' ')[1] if auth_header
-    #   end
-    
-    #   def set_current_user!(id)
-    #     @current_user = User.find(id)
-    #   end
-    
+      #Forgets a persistent session
 
+      def forget(user)
+        user.forget
+        cookies.delete(:user_id)
+        cookies.delete(:remember_token)
+      end
+
+
+      # #Logs out the current user
+      # def log_out
+      #   forget(current_user)
+      #   reset_session
+      #   @current_user = nil
+      # end
+
+  
+  
+  
+  
+  
+  
+  
+
+    
 
 end

@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     def login
         user = User.find_by(email: params[:email])
 
-    #  byebug
+    # byebug
 
         if user && user.authenticate(params[:password])
           token = encode_token({ user_id: user.id })
