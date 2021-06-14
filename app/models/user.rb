@@ -1,9 +1,13 @@
 class User < ApplicationRecord
     has_many :orders
     has_many :order_details, through: :orders
-    
+
+    attr_accessor :remember_token, :activation_token
+
     before_save {  email.downcase! }
-    validates :name, presence: true, length: { maximum: 255 }
+    before_create :create_activation_digest
+
+    validates :name, presence: true, length: { maximum: 55 }
 
     
 
@@ -14,4 +18,11 @@ class User < ApplicationRecord
 
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }
+
+    private
+    def create_activation_digest
+        self.activation_token = User.new_token
+        self.activation_digest = User.digest(activation_token)
+    end
+    
 end
