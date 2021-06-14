@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
     # skip_before_action :authenticate, only: [:create, :login, :index, :show]
-    skip_before_action :authorized, only: [:create, :login, :update, :destroy]
+    skip_before_action :authorized, only: [:create, :login]
     before_action :correct_user, only: [:edit, :update]
     before_action :admin_user, only: [:destroy, :index]
 
 
     def index
+        # byebug
         user = User.all
         render json: user
     end
@@ -33,9 +34,6 @@ class UsersController < ApplicationController
 
     def login
         user = User.find_by(email: params[:email])
-
-    # byebug
-
         if user && user.authenticate(params[:password])
           token = encode_token({ user_id: user.id })
           # encode_token might need to be issue_token
@@ -77,7 +75,8 @@ class UsersController < ApplicationController
     end
 
     def admin_user
-        render json: { error: "Douse not have permission to this rout"}, status: :unauthorized unless current_user?.admin?
+        # byebug
+        render json: { error: "Douse not have permission to this rout"}, status: :unauthorized unless current_user.admin?
     end
 
     

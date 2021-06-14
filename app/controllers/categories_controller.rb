@@ -3,7 +3,6 @@ class CategoriesController < ApplicationController
 
     
     def index
-        
         categories = Category.all
         render json: categories.to_json(:include => {
             :products => {:only => [:name, :company, :price, :id, :category_id, :image]}

@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
       include ActionController::Cookies
       # include SessionsHelper
       before_action :authorized
-  
+ 
   
       def log_in(user)
         session[:user_id] = user.id
@@ -20,6 +20,7 @@ class ApplicationController < ActionController::API
 
   # Returns the user corresponding to the remember token cookie.
   def current_user
+    # byebug
     if (user_id = session[:user_id])
       # @current_user ||= User.find_by(id: user_id)
       user = User.find_by(id: user_id)
@@ -41,6 +42,7 @@ class ApplicationController < ActionController::API
       end
 
       def authorized
+        # byebug
         current_user
         render json: { message: "Not logged in"}, status: :unauthorized unless @current_user
       end
