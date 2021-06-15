@@ -16,8 +16,8 @@ Order.destroy_all
 
 puts "Destroyed Data"
 
-user1 = User.create!(email: "menachemfuterfas@gmail.com", name: "menachem frank", phoneNumber1: 7187743214, phoneNumber2: 6462345678, address: "435 windler rd", activated: false, admin: false, employee: false, password: "passpass", password_confirmation: "passpass")
-user2 = User.create!(email: "menachem@gmail.com", name: "zalman heller", phoneNumber1: 6787743214, phoneNumber2: 8762345678, address: "434 windler rd", activated: false, admin: true, employee: false, password: "passpass", password_confirmation: "passpass")
+user1 = User.create!(email: "menachemfuterfas@gmail.com", name: "menachem frank", phoneNumber1: 7187743214, phoneNumber2: 6462345678, address: "435 windler rd",  activated: true,activated_at: Time.zone.now, admin: false, employee: false, password: "passpass", password_confirmation: "passpass")
+user2 = User.create!(email: "menachem@gmail.com", name: "zalman heller", phoneNumber1: 6787743214, phoneNumber2: 8762345678, address: "434 windler rd",  activated: true,activated_at: Time.zone.now,  admin: true, employee: false, password: "passpass", password_confirmation: "passpass")
 
 100.times do 
     User.create(

@@ -21,13 +21,17 @@ class UsersController < ApplicationController
 
     def create
         # byebug
-            user = User.create!(user_sign_up_params)
-        if user.valid?
-            token = encode_token({ user_id: user.id })
+            @user = User.create!(user_sign_up_params)
+            @user.send_activation_email
+        # if user.valid?
+        #     token = encode_token({ user_id: user.id })
     
-            render json: { user: UserSerializer.new(user), token: token }, status: :created
+        #     render json: { user: UserSerializer.new(user), token: token }, status: :created
+        if @user.save
+            UserMailer.account_activation(@user).deliver_now
+            render json: {message: "Please check your email to activate your account"}
+        
         else
-           
             render json: { error: user.errors.full_messages }, status: :bad_request
         end
     end

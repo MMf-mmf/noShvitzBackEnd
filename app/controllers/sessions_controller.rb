@@ -7,11 +7,17 @@ class SessionsController < ApplicationController
   def create
    
     user = User.find_by(email: params[:session][:email].downcase)
+    
       if user && user.authenticate(params[:session][:password])
-        reset_session
-        params[:session][:remember_me] == true ? remember(user) : forget(user)
-        log_in user
-        render json: { user: UserSerializer.new(user) }   # , status: :created
+        if user.activated?
+          # byebug
+          reset_session
+          params[:session][:remember_me] == true ? remember(user) : forget(user)
+          log_in user
+          render json: { user: UserSerializer.new(user) }   # , status: :created
+          else
+            render json: {message: "Account not activated, Check your email for the activation link"}
+          end
         else
           render json: {error: "Invalid username or password"}
         end
