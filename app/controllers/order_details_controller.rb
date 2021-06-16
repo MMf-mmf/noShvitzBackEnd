@@ -1,5 +1,6 @@
 class OrderDetailsController < ApplicationController
-    skip_before_action :authorized, only: [:index, :show, :update, :create]
+    #skip_before_action :authorized, only: [:index, :show, :update, :create]
+
     def index
         details = OrderDetail.all
         render json: details
