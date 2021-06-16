@@ -26,6 +26,7 @@ class OrdersController < ApplicationController
 
 
     def cart
+        
         userId = params[:user_id]
         categoryId = params[:category_id]
         # byebug

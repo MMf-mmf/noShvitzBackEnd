@@ -24,10 +24,12 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    byebug
     logout if logged_in?
   end
 
   def autologin
+    # byebug
     render json: @current_user
   end
 
@@ -40,6 +42,7 @@ class SessionsController < ApplicationController
 
     #Logs out the current user
     def logout
+   
       forget(current_user)
       reset_session
       @current_user = nil
