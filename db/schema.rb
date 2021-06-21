@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2021_06_08_172045) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.integer "id_name"
+    t.integer "category_id"
     t.datetime "deadline"
     t.string "image"
     t.datetime "created_at", precision: 6, null: false

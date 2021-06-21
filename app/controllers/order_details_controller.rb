@@ -14,9 +14,9 @@ class OrderDetailsController < ApplicationController
         all_carts = Order.where(cart: true)
         user_carts = all_carts.select{ | cart |cart.user_id == userId && cart.category_id == categoryId}
         cart = user_carts[0]
+        # byebug
         cartId = cart.id
-       
-        cart_details = cart.order_details
+               cart_details = cart.order_details
         is_in_cart = cart_details.find_by(product_id: params[:product_id])
         # byebug
         if (is_in_cart)

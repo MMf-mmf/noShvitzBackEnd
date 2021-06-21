@@ -26,12 +26,16 @@ class OrdersController < ApplicationController
 
 
     def cart
-   
+
+
         userId = params[:user_id]
         categoryId = params[:category_id]
         # byebug
         all_carts = Order.where(cart: true)
         user_carts = all_carts.select{ | cart |cart.user_id == userId && cart.category_id == categoryId}
+        if user_carts.empty?
+            return render json: {message: 'nothing in cart'}
+        end
         cart_details = user_carts[0].order_details
         # .order_details.where("product.category_id" == categoryId)
         render json: cart_details.to_json(:include =>{
@@ -52,7 +56,7 @@ class OrdersController < ApplicationController
         order = Order.create!(user_id: params[:user_id], category_id: params[:category_id], fulfilled: false, cart: true, submitted: false , total: 0)
         return render json: order 
         end
-        render json: { cart_error: "A card for this category already exists" }
+        render json: { cart_error: "A cart for this category already exists" }
     end
 
 

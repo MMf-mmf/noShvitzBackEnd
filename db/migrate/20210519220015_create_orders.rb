@@ -9,9 +9,7 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.boolean :fulfilled
       t.boolean :cart
       t.boolean :submitted
-
       t.timestamps
-      
     end
   end
 end
