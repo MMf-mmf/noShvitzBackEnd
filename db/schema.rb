@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(version: 2021_06_08_172045) do
     t.string "remember_digest"
     t.string "activation_digest"
     t.datetime "activated_at"
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

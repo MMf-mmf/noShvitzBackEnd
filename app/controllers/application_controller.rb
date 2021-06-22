@@ -13,6 +13,7 @@ class ApplicationController < ActionController::API
       end
 
   # Remembers a user in a persistent session.
+  
   def remember(user)
     user.remember
     cookies.permanent.encrypted[:user_id] = user.id

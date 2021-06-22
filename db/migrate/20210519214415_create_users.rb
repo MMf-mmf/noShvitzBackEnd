@@ -15,6 +15,9 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :remember_digest
       t.string :activation_digest
       t.datetime :activated_at
+      t.string :reset_digest
+      t.datetime :reset_sent_at
+     
 
       t.timestamps
     end
