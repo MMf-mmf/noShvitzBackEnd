@@ -71,19 +71,19 @@ product10 = Product.create!(name: "Apples", company: "IKEA", category_id: cat3.i
 
 
 
-order1 = Order.create!(user_id: user1.id, category_id: cat1.id, employee_id: nil, total: 0, notes: nil, fulfilled: false, cart: true, submitted: false)
-order2 = Order.create!(user_id: user1.id, category_id: cat2.id, employee_id: nil, total: 0, notes: nil, fulfilled: false, cart: true, submitted: false)
+# order1 = Order.create!(user_id: user1.id, category_id: cat1.id, employee_id: nil, total: 0, notes: nil, fulfilled: false, cart: true, submitted: false)
+# order2 = Order.create!(user_id: user1.id, category_id: cat2.id, employee_id: nil, total: 0, notes: nil, fulfilled: false, cart: true, submitted: false)
 
 
-orderd1 = OrderDetail.create!(order_id: order1.id, product_id: product1.id, quantity: 5)
-orderd2 = OrderDetail.create!(order_id: order1.id, product_id: product2.id, quantity: 2)
-OrderDetail.create!(order_id: order1.id, product_id: product5.id, quantity: 4)
-OrderDetail.create!(order_id: order1.id, product_id: product6.id, quantity: 6)
+# orderd1 = OrderDetail.create!(order_id: order1.id, product_id: product1.id, quantity: 5)
+# orderd2 = OrderDetail.create!(order_id: order1.id, product_id: product2.id, quantity: 2)
+# OrderDetail.create!(order_id: order1.id, product_id: product5.id, quantity: 4)
+# OrderDetail.create!(order_id: order1.id, product_id: product6.id, quantity: 6)
 
 
 
-orderd3 = OrderDetail.create!(order_id: order2.id, product_id: product3.id, quantity: 4)
-orderd3 = OrderDetail.create!(order_id: order2.id, product_id: product4.id, quantity: 5)
+# orderd3 = OrderDetail.create!(order_id: order2.id, product_id: product3.id, quantity: 4)
+# orderd3 = OrderDetail.create!(order_id: order2.id, product_id: product4.id, quantity: 5)
 
 
 

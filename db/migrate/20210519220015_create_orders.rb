@@ -5,6 +5,8 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.integer :employee_id
       t.integer :category_id
       t.float :total, default: 0
+      t.integer :category_quantity, default: 0
+      t.integer :case_quantity, default: 0
       t.string :notes
       t.boolean :fulfilled
       t.boolean :cart

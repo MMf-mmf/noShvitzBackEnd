@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2021_06_08_172045) do
     t.integer "product_id"
     t.integer "status_code"
     t.integer "quantity"
-    t.integer "price"
+    t.float "price"
     t.float "weight"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 2021_06_08_172045) do
     t.integer "employee_id"
     t.integer "category_id"
     t.float "total", default: 0.0
+    t.integer "category_quantity", default: 0
+    t.integer "case_quantity", default: 0
     t.string "notes"
     t.boolean "fulfilled"
     t.boolean "cart"

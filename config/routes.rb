@@ -19,5 +19,8 @@ Rails.application.routes.draw do
   patch "/submit", to: "orders#submit"
   post "/orders", to: "orders#order"
   patch "/password_resets", to: "password_resets#update"
+
+  delete "categories", to: "categories#delete"
+  delete "products", to: "products#delete"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

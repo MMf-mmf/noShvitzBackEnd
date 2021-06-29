@@ -11,10 +11,13 @@ class OrdersController < ApplicationController
         }, except:[:created_at, :updated_at])
     end
 
+
     def show
-        # byebug
-        order = Order.where(user_id: params[:id])
-        render json: order 
+        id = params[:id].to_i
+        order = Order.where(user_id: id)
+        render json: order.to_json(:include => {
+            :category => {:only => [:name]}
+        })
     end
 
     # def order

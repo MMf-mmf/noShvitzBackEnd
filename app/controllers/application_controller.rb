@@ -85,5 +85,9 @@ class ApplicationController < ActionController::API
  def current_user?(user)
   user && user == current_user
 end  
+
+def admin_user
+  render json: { error: "Douse not have permission to this rout"}, status: :unauthorized unless current_user.admin?
+end
   
 end

@@ -4,6 +4,12 @@ class UsersController < ApplicationController
     before_action :correct_user, only: [:edit, :update]
     before_action :admin_user, only: [:destroy, :index]
 
+    def show
+        id = params[:id].to_i
+        user = User.find_by(id: id)
+        
+        render json: user
+    end
 
     def index
         # byebug
