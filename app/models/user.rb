@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
     has_many :orders
     has_many :order_details, through: :orders
+    
 
     attr_accessor :remember_token, :activation_token, :reset_token
 

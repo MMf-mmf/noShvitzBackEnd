@@ -4,6 +4,21 @@ class UsersController < ApplicationController
     before_action :correct_user, only: [:edit, :update]
     before_action :admin_user, only: [:destroy, :index]
 
+
+    # cart_details = user_carts[0].order_details
+    # render json: cart_details.to_json(:include =>{
+    #         :order => {:only => [:id, :category_id, :submitted, :total]},
+    #         :product => {:only => [:name, :company, :price, :category_id, :image]}
+    #             }, :except => [:updated_at])
+
+    def index
+        # byebug
+         user = User.all
+        # byebug
+        render json: user
+    end
+
+
     def show
         id = params[:id].to_i
         user = User.find_by(id: id)
@@ -11,11 +26,7 @@ class UsersController < ApplicationController
         render json: user
     end
 
-    def index
-        # byebug
-        user = User.all
-        render json: user
-    end
+
 
     def update
         if @user.update(user_sign_up_params)
@@ -23,6 +34,33 @@ class UsersController < ApplicationController
         else
             render json: {message: "Update not successful"}
         end
+    end
+
+    def users_bulk_create
+        params[:_json].each_with_index do | userArray, index |
+            if index != 0
+                puts userArray
+                puts ""
+                puts ""
+                # puts userArray['data'][0]
+                # puts userArray['data'][1]
+                # puts userArray['data'][2]
+                # puts userArray['data'][3]
+                # puts userArray['data'][4]
+                # puts userArray['data'][5]
+                # puts userArray['data'][6]
+                # User.create(
+                #     name: userArray['data'][0],
+                #     email: userArray['data'][1],
+                #     phoneNumber1: userArray['data'][2],
+                #     phoneNumber2: userArray['data'][3],
+                #     admin: userArray['data'][4],
+                #     activated: userArray['data'][5],
+                #     password: userArray['data'][6]
+                # )
+            end
+        end
+        render json: {message: "Users added Successfully"}
     end
 
     def create
