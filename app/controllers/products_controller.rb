@@ -23,19 +23,19 @@ class ProductsController < ApplicationController
     def products_bulk_create
         params[:_json].each_with_index do | userArray, index |
             if index != 0
-                puts userArray
-                puts ""
-                puts ""
+                # puts userArray
+                # puts ""
+                # puts ""
 
-                puts userArray['data'][0]
-                puts userArray['data'][1]
-                puts userArray['data'][2]
-                puts userArray['data'][3]
-                puts userArray['data'][4]
-                puts userArray['data'][5]
-                puts userArray['data'][6]
-                puts ""
-                puts ""
+                # puts userArray['data'][0]
+                # puts userArray['data'][1]
+                # puts userArray['data'][2]
+                # puts userArray['data'][3]
+                # puts userArray['data'][4]
+                # puts userArray['data'][5]
+                # puts userArray['data'][6]
+                # puts ""
+                # puts ""
                 Product.create(
                     name: userArray['data'][0],
                     company: userArray['data'][1],
@@ -61,14 +61,18 @@ class ProductsController < ApplicationController
 
     def delete
         result = Product.where(:id => params[:itemsToDelete]).destroy_all
-        byebug
+       
         if result.length < 1
          return render json: {message: "A Error Occurred When Trying To Delete "}
         end
-        render json: {message: "Dilation was successful"}
+        render json: {message: "Deletion was successful"}
     end
 
     def update
         
+        id = params[:id].to_i
+        product = Product.find_by(id: id)
+        product.update(name: params[:name], company: params[:company], image: params[:image], price: params[:price], limit: params[:limit])
+        render json: {message: "Category item was Update Successfully"}
     end
 end

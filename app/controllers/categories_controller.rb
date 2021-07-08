@@ -37,7 +37,16 @@ class CategoriesController < ApplicationController
 
     def create 
       new_category = Category.create!(name: params[:name], category_id: Category.last.id + 1, deadline: params[:deadline], image: params[:picture])
-      render json: {message: 'Category Add Successfully'}
+      render json: {message: 'Category Added Successfully'}
+    end
+
+
+    def update
+        # byebug
+       id = params[:id].to_i
+       category = Category.find_by(id: id)
+       category.update(name: params[:name], deadline: params[:deadLine], image: params[:picture])
+       render json: {message: "Category item was Update Successfully"}
     end
 
 
