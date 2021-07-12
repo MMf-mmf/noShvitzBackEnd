@@ -1,5 +1,8 @@
+
+
 class OrderDetailsController < ApplicationController
     #skip_before_action :authorized, only: [:index, :show, :update, :create]
+    before_action :admin_user, only: [:what_to_order]
 
     def index
         details = OrderDetail.all
@@ -81,9 +84,43 @@ class OrderDetailsController < ApplicationController
 
 
 
+    def what_to_order  # add a cattegory id
+        carts = Order.where(cart: true , submitted: true, fulfilled: false, category_id: params[:id]) # this will return a array of orders which fit the description
+        #loop over the array and to get the array of order_details for each order
+        items = {}
+        
+        carts.each_with_index do | order, index1 |
+            order.order_details.each_with_index do | item_detail, index2 |
+                
+                if items[item_detail.product.name] != nil
+                    items[item_detail.product.name] = items[item_detail.product.name] + item_detail.quantity
+                    # byebug
+                else 
+                    items[item_detail.product.name] = item_detail.quantity
+                end
+            end     
+        end
+        # byebug
+
+        # details = carts[0].order_details  # this returns a array of with the item id's and the quantitys
+
+        # in the inner loop add
+        if items.length == 0 
+            return render json: {message: "no data to found"}
+        end
+        data = items.to_json #.gsub!(/\"/, '\'')
+        
+        #byebug
+        
+       render json: JSON.parse(data)
+    end
     
 
 
+    def admin_user
+        # byebug
+        render json: { error: "Douse not have permission to this rout"}, status: :unauthorized unless current_user.admin?
+    end
 
     private
 

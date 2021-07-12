@@ -31,6 +31,7 @@ class CategoriesController < ApplicationController
                 )
             end
         end
+        
         # byebug
         render json: {message: "Users added Successfully"}
     end
