@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
     def index
         categories = Category.all
         render json: categories.to_json(:include => {
-            :products => {:only => [:name, :company, :price, :id, :category_id, :image]}
+            :products => {:only => [:name, :company, :price, :id, :category_id, :image, :limit]}
         }, except:[:created_at, :updated_at]) 
     end
 
@@ -14,7 +14,7 @@ class CategoriesController < ApplicationController
             if index != 0
                 puts userArray
                 puts ""
-                puts ""
+                puts""
 
                 puts userArray['data'][0]
                 puts userArray['data'][1]

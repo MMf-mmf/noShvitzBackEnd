@@ -42,9 +42,10 @@ class OrdersController < ApplicationController
         cart_details = user_carts[0].order_details
         # .order_details.where("product.category_id" == categoryId)
         render json: cart_details.to_json(:include =>{
-                :order => {:only => [:id, :category_id, :submitted, :total]},
-                :product => {:only => [:name, :company, :price, :category_id, :image]}
+                :order => {:only => [:id, :category_id, :submitted, :total, :category_quantity, :case_quantity]},
+                :product => {:only => [:name, :company, :price, :category_id, :image, :limit]}
                     }, :except => [:updated_at])
+    
     end
 
 
