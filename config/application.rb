@@ -39,6 +39,6 @@ module ProjectNoShvitz
 
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
-    # ,  key: '_cookie_name', path: '/', same_site: :None, secure: true
+    ,  key: '_cookie_name', path: '/', same_site: :None, secure: true
   end
 end
