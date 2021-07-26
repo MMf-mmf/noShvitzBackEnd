@@ -59,7 +59,7 @@ product16 = Product.create!(name: "Or haganuz", company: "kedem", category_id: c
 product17 = Product.create!(name: "smaberg", company: "kedem", category_id: cat1.id,  price: 99.99, image: "https://i.pinimg.com/originals/20/95/33/209533fd16c5153ad55de03455c8f3ec.png" ,  limit: 5)
 
 product3 = Product.create!(name: "chicken legs", company: "robashken", category_id: cat2.id, price: 2.89, image: "https://www.springfieldpoultry.co.uk/wp-content/uploads/2016/12/SP63888.jpg" ,  limit: 4)
-product4 = Product.create!(name: "chicken wings", company: "robashken", category_id: cat2.id,  price: 0.89, image: "http://www.thecrownmarket.com/wp-content/uploads/2018/10/raw-chicken-wings.jpg" ,  limit: 5)
+product4 = Product.create!(name: "chicken wings", company: "robashken", category_id: cat2.id,  price: 0.89, image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.istockphoto.com%2Fphotos%2Fraw-chicken-wing-isolated-on-white-background-picture-id484375492%3Fk%3D6%26m%3D484375492%26s%3D612x612%26w%3D0%26h%3DczZblPiSme_uowltZjtCHKDM-3_8UI_zZJIxDQyRSOU%3D&f=1&nofb=1" ,  limit: 5)
 product12 = Product.create!(name: "Lamb chops", company: "Star", category_id: cat2.id,  price: 7.89, image: "https://thejewishkitchen.com/wp-content/uploads/2016/06/lamb-chops4.jpg" ,  limit: 5)
 product13 = Product.create!(name: "Boneless chicken breast", company: "robashken", category_id: cat2.id,  price: 9.89, image: "https://blog.thermoworks.com/wp-content/uploads/2018/02/iStock_45233784_LARGE.jpg" ,  limit: 5)
 

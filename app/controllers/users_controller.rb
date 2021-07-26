@@ -64,28 +64,32 @@ class UsersController < ApplicationController
     end
 
     def create
-        # byebug
+       
             @user = User.create!(user_sign_up_params)
+            
             @user.send_activation_email
         if @user.save
             UserMailer.account_activation(@user).deliver_now
             render json: {message: "Please check your email to activate your account"}
         else
+            
             render json: { error: user.errors.full_messages }, status: :bad_request
         end
     end
 
     def login
         user = User.find_by(email: params[:email])
+   
         if user && user.authenticate(params[:password])
           token = encode_token({ user_id: user.id })
           # encode_token might need to be issue_token
           # cookies.signed[:jwt] = {value: token, httponly: true}
           
           render json: { user: UserSerializer.new(user), token: token }
-          
+         
           render json: user # implicitly run serializer
         else
+       
           render json: { error: "Invalid name or password" }, status: :unauthorized
         end
     end

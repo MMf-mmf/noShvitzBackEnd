@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   post "/users_bulk_create", to: "users#users_bulk_create"
   post "products_bulk_create", to: "products#products_bulk_create"
   post "categories_bulk_create", to:"categories#categories_bulk_create"
+  post "charges", to: "charges#create"
   post "/cart", to: "orders#cart"
   patch "/submit", to: "orders#submit"
   post "/orders", to: "orders#order"
@@ -27,3 +28,9 @@ Rails.application.routes.draw do
   delete "products", to: "products#delete"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
+
+
+
+
+
+

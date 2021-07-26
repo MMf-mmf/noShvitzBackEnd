@@ -21,7 +21,9 @@ class User < ApplicationRecord
                         uniqueness: true
 
     has_secure_password
-    validates :password, presence: true, length: { minimum: 6 }
+    validates :password, presence: true, length: { minimum: 8 }
+
+    validates :phoneNumber1, format: { with: /\d{3}\d{3}\d{4}/, message: "Phone number must be valid" }
 
 # Returns the hash digest of the given string.
 def User.digest(string)
