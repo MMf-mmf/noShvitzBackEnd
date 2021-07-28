@@ -65,12 +65,27 @@ class OrdersController < ApplicationController
 
 
 
+    # @user = User.create!(user_sign_up_params)
+    # @user.send_activation_email
+
+
+
     def submit
+      
+        @user = User.find_by(id: params[:user_id])
+        
         order = Order.find_by(id: params[:id], )
         reverse_submitted_value = !order.submitted
         order.update!(submitted: reverse_submitted_value)
-      
+        
+        if reverse_submitted_value === true
+            @user.send_order_confirmation_email 
+        else
+            @user.send_order_cancellation_email 
+        end
+   
         render json: order
+
     end
 
 private

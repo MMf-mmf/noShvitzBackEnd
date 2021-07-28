@@ -17,4 +17,18 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.password_reset(user)
   end
 
+
+# Preview this email at http://localhost:3000/rails/mailers/user_mailer/order_confirmation
+def order_confirmation
+  user = User.first
+  UserMailer.order_confirmation(user)
+end
+
+
+# Preview this email at http://localhost:3000/rails/mailers/user_mailer/order_cancellation
+def order_cancellation
+  user = User.first
+  UserMailer.order_cancellation(user)
+end
+
 end

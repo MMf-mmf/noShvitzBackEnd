@@ -66,7 +66,7 @@ class UsersController < ApplicationController
     def create
        
             @user = User.create!(user_sign_up_params)
-            
+           
             @user.send_activation_email
         if @user.save
             UserMailer.account_activation(@user).deliver_now
