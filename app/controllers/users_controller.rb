@@ -80,8 +80,7 @@ class UsersController < ApplicationController
             UserMailer.account_activation(@user).deliver_now
             render json: {message: "Please check your email to activate your account"}
         else
-            
-            render json: { error: user.errors.full_messages }, status: :bad_request
+            render json: { error: @user.errors.full_messages }, status: :bad_request
         end
     end
 
