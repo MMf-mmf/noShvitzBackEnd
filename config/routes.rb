@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   get "/autologin", to: "sessions#autologin"
   get "/users", to: "users#index"
+  get "/users/:id", to: "users#show"
   post "/users_bulk_create", to: "users#users_bulk_create"
   post "products_bulk_create", to: "products#products_bulk_create"
   post "categories_bulk_create", to:"categories#categories_bulk_create"

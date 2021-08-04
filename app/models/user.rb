@@ -21,7 +21,7 @@ class User < ApplicationRecord
                         uniqueness: true
 
     has_secure_password
-    validates :password, presence: true, length: { minimum: 8 }
+    validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
 
     validates :phoneNumber1, format: { with: /\d{3}\d{3}\d{4}/, message: "Phone number must be valid" }
 

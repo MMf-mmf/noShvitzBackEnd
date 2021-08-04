@@ -20,17 +20,25 @@ class UsersController < ApplicationController
 
 
     def show
-        id = params[:id].to_i
-        user = User.find_by(id: id)
-        
-        render json: user
+        # byebug
+        user = User.find(params[:id])
+        if current_user?(user) || current_user.admin?
+            id = params[:id].to_i
+            user = User.find_by(id: id)
+          return render json: user   
+        end
+        render json: {message: "Douse not have permission to this rout"}
     end
 
 
 
     def update
-        if @user.update(user_sign_up_params)
-            render json: {message: 'Successfully Updated'}
+    
+        id = params[:id].to_i
+        user = User.find_by(id: id)
+        byebug
+        if user.update!(name: params[:name], email: params[:email], phoneNumber1: params[:phone1], phoneNumber2: params[:phone2] )
+           return render json: {message: 'Successfully Updated'}
         else
             render json: {message: "Update not successful"}
         end
@@ -118,7 +126,7 @@ class UsersController < ApplicationController
 
     def correct_user
         @user = User.find(params[:id])
-        render json: { error: "Douse not have permission to this rout " }, status: :unauthorized unless current_user?(@user)
+        render json: { error: "Douse not have permission to this rout " }, status: :unauthorized unless current_user?(@user) || current_user.admin?
     end
 
     def admin_user

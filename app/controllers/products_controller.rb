@@ -69,7 +69,6 @@ class ProductsController < ApplicationController
     end
 
     def update
-        
         id = params[:id].to_i
         product = Product.find_by(id: id)
         product.update(name: params[:name], company: params[:company], image: params[:image], price: params[:price], limit: params[:limit])
