@@ -17,19 +17,10 @@ class ApplicationController < ActionController::API
   def remember(user)
     user.remember
     cookies.permanent.encrypted[:user_id] = user.id
-    # cookies[:user_id] = {value: user.id, expires: 20.years.from_now.utc,
-    #                       # secure: Rails.application.config.secure_cookies,
-    #                       secure: :true,
-    #                       same_site: :none }
     cookies.permanent[:remember_token] = user.remember_token
 
   
-    # cookies[:remember_token] = {value: user.remember_token,
-    #                           expires: 20.years.from_now.utc,
-    #                               # secure: Rails.application.config.secure_cookies,
-    #                               secure: :true,
-    #                               same_site: :none
-    #                             } 
+  
 
    
   end

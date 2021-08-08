@@ -11,7 +11,7 @@ class AccountActivationsController < ApplicationController
         
        return render json: {message: "Account activated!"} 
       else
-        render json: {message: "Invalid activation link"} 
+        render json: {message: "This account has already been activated try loging in"} 
       end
     end
   
