@@ -37,8 +37,9 @@ class CategoriesController < ApplicationController
     end
 
     def create 
-      new_category = Category.create!(name: params[:name], category_id: Category.last.id + 1, deadline: params[:deadline], image: params[:picture])
-      render json: {message: 'Category Added Successfully'}
+        # byebug
+       new_category = Category.create!(name: params[:name], category_id: Category.last.id + 1, deadline: params[:deadLine], image: params[:picture])
+       render json: {message: 'Category Added Successfully'}
     end
 
 

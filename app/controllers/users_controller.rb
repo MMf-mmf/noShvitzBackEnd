@@ -33,11 +33,10 @@ class UsersController < ApplicationController
 
 
     def update
-    
         id = params[:id].to_i
         user = User.find_by(id: id)
-        byebug
-        if user.update!(name: params[:name], email: params[:email], phoneNumber1: params[:phone1], phoneNumber2: params[:phone2] )
+        # byebug
+        if user.update!(name: params[:name], phoneNumber1: params[:phone1], phoneNumber2: params[:phone2] )
            return render json: {message: 'Successfully Updated'}
         else
             render json: {message: "Update not successful"}

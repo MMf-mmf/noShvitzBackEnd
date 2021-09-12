@@ -29,8 +29,6 @@ class OrdersController < ApplicationController
 
 
     def cart
-
-
         userId = params[:user_id]
         categoryId = params[:category_id]
         # byebug
@@ -46,6 +44,26 @@ class OrdersController < ApplicationController
                 :product => {:only => [:name, :company, :price, :category_id, :image, :limit]}
                     }, :except => [:updated_at])
     
+    end
+
+    def cartCount
+        userId = params[:user_id]
+        categorys = {}
+        all_carts = Order.where(cart: true)
+        
+        Category.all.each_with_index do | categoryArray, index |
+           count =  all_carts.select{ | cart |cart.user_id == userId && cart.category_id == categoryArray.id}
+            p count[0]
+            if count[0] != nil
+                # categorys.push(count[0].case_quantity)
+                categorys[categoryArray.id] = count[0].case_quantity
+            end
+             
+      
+        end
+        # byebug
+        return render json: categorys.to_json
+        
     end
 
 

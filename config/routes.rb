@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post "categories_bulk_create", to:"categories#categories_bulk_create"
   post "charges", to: "charges#create"
   post "/cart", to: "orders#cart"
+  post "/cartCount", to: "orders#cartCount"
   patch "/submit", to: "orders#submit"
   post "/orders", to: "orders#order"
   patch "/password_resets", to: "password_resets#update"
