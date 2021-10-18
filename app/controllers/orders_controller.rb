@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
     # skip_before_action :authorized, only: [:index, :show]
-
+    before_action :admin_user, only: [:delete]
 
     
 
@@ -79,6 +79,12 @@ class OrdersController < ApplicationController
         return render json: order 
         end
         render json: { cart_error: "A cart for this category already exists" }
+    end
+
+    def delete
+        byebug
+        #delete all orders which are older then 30 days
+        Order.where(['created_at < ?', 30.days.ago]).destroy_all
     end
 
 

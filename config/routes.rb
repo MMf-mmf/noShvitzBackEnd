@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   post "/cartCount", to: "orders#cartCount"
   patch "/submit", to: "orders#submit"
   post "/orders", to: "orders#order"
+  delete "delete_orders", to: "orders#delete"
   patch "/password_resets", to: "password_resets#update"
   get "what_to_order/:id", to: "order_details#what_to_order"
   delete "categories", to: "categories#delete"
